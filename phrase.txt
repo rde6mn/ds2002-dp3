@@ -1,6 +1,19 @@
-# I worked with a partner on this project. Her/his name is:
+# I worked on this alone. 
 
 
 # Put your reassembled phrase here:
+People who know what they're talking about don't need PowerPoint.
 
+messages = [
+    {"order":0, "word":"People"}
+    {"order":9, "word":"who"}
+    {"order":1, "word":"know"}
+    {"order":2, "word":"what"}
+    {"order":3, "word":"they're"}
+    {"order":4, "word":"talking"}
+    {"order":5, "word":"about"}
+    {"order":6, "word":"don't"}
+    {"order":7, "word":"need"}
+    {"order":8, "word":"PowerPoint."}
+]
 

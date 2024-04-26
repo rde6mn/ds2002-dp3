@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import boto3
 from botocore.exceptions import ClientError
 import requests
@@ -19,8 +21,8 @@ def delete_message(handle):
     except ClientError as e:
         print(e.response['Error']['Message'])
 
-def get_message(int num):
-    for x in range(num):
+def get_message():
+    
         try:
             # Receive message from SQS queue. Each message has two MessageAttributes: order and word
             # You want to extract these two attributes to reassemble the message
@@ -38,20 +40,29 @@ def get_message(int num):
             if "Messages" in response:
                 # extract the two message attributes you want to use as variables
                 # extract the handle for deletion later
-                order = response['Messages'][x]['MessageAttributes']['order']['StringValue']
-                word = response['Messages'][x]['MessageAttributes']['word']['StringValue']
-                handle = response['Messages'][x]['ReceiptHandle']
+                order = response['Messages'][0]['MessageAttributes']['order']['StringValue']
+                word = response['Messages'][0]['MessageAttributes']['word']['StringValue']
+                handle = response['Messages'][0]['ReceiptHandle']
 
                 # Print the message attributes - this is what you want to work with to reassemble the message
                 print(f"Order: {order}")
                 print(f"Word: {word}")
                 print(f"Handle: {handle}")
 
-                listE.append([order, f"Order: {order}", f"Word: {word}", handle])
+                listE.append([f"Order: {order}", f"Word: {word}", handle])
+                delete_message(handle)
 
             # If there is no message in the queue, print a message and exit    
             else:
                 print("No message in the queue")
+                listE.sort()
+                print(listE)
+                for m in listE:
+                    listM.append([m[1],m[2]])
+                    
+
+                print(listM)
+
                 exit(1)
                 
         # Handle any errors that may occur connecting to SQS
@@ -61,9 +72,11 @@ def get_message(int num):
 # Trigger the function
 #if __name__ == "__main__":
 #   get_message()
-get_message(10)
-listE.sort()
-for m in listE:
-    listM.append([m[1],m[2]])
-    delete_message(m[3])
 
+
+
+for x in range(10):
+    get_message()
+
+#replaced arguement + uncommented to delete messages
+#delete_message('AQEByPE5VtKg5gH1F+vxPYyqpXmSuakcftHye3WJuF88DqLwaDuURqxKZdENgpz3bYsCG7HXF/bbwx71E/v1VCpf8ADFzCVSQK5Vm0+24QdOAAdDxxLsiBz9c0iHV8/x5dMysLnpjc/aVwrKcd/jRFA6UFWkSA416nEXw1WOQN5AAwHmi6bQuAVrSZFy9fdwNHKI5BbVSGptNgtKslJdoUzcNHRcTdTFEOmZwMeXNN7hVtnbc6JmsrBLzE7eCEOKh/B7y2t+n1IrFHcdwnqzucI9t+/JuDFqpYYRAjya3Fc5Rpr4GXG3woTl0YTmIpjTSaJW6ngzE3RJpVsP/EbnUg3npEsZzwkFTACRoN5h1sOcnaa0C5g8fiuaXDMm5iEEZ62H')
