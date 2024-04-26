@@ -42,6 +42,7 @@ def get_message():
                 # extract the handle for deletion later
                 order = response['Messages'][0]['MessageAttributes']['order']['StringValue']
                 word = response['Messages'][0]['MessageAttributes']['word']['StringValue']
+                #deletes message
                 handle = response['Messages'][0]['ReceiptHandle']
 
                 # Print the message attributes - this is what you want to work with to reassemble the message
@@ -78,5 +79,3 @@ def get_message():
 for x in range(10):
     get_message()
 
-#replaced arguement + uncommented to delete messages
-#delete_message('AQEByPE5VtKg5gH1F+vxPYyqpXmSuakcftHye3WJuF88DqLwaDuURqxKZdENgpz3bYsCG7HXF/bbwx71E/v1VCpf8ADFzCVSQK5Vm0+24QdOAAdDxxLsiBz9c0iHV8/x5dMysLnpjc/aVwrKcd/jRFA6UFWkSA416nEXw1WOQN5AAwHmi6bQuAVrSZFy9fdwNHKI5BbVSGptNgtKslJdoUzcNHRcTdTFEOmZwMeXNN7hVtnbc6JmsrBLzE7eCEOKh/B7y2t+n1IrFHcdwnqzucI9t+/JuDFqpYYRAjya3Fc5Rpr4GXG3woTl0YTmIpjTSaJW6ngzE3RJpVsP/EbnUg3npEsZzwkFTACRoN5h1sOcnaa0C5g8fiuaXDMm5iEEZ62H')
