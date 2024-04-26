@@ -49,7 +49,7 @@ def get_message():
                 print(f"Word: {word}")
                 print(f"Handle: {handle}")
 
-                listE.append([f"Order: {order}", f"Word: {word}", handle])
+                listE.append([order, f"Order: {order}", f"Word: {word}", handle])
                 delete_message(handle)
 
             # If there is no message in the queue, print a message and exit    
